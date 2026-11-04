@@ -188,12 +188,11 @@
   const form = q('[data-form]');
   if (form) {
     const err = q('[data-form-error]', form);
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
+    const message = () => {
       const d = Object.fromEntries(new FormData(form).entries());
-      if (!d.nombre.trim() || !d.telefono.trim()) { err.hidden = false; return; }
+      if (!d.nombre.trim() || !d.telefono.trim()) { err.hidden = false; return null; }
       err.hidden = true;
-      const lines = (EN ? [
+      return (EN ? [
         'Hi, I am ' + d.nombre.trim() + '.',
         'I am interested in: ' + d.interes + '.',
         d.ciudad ? 'I am in ' + d.ciudad.trim() + '.' : '',
@@ -212,11 +211,36 @@
         d.estimacion ? 'La calculadora me dio ' + d.estimacion + ' de cobertura estimada.' : '',
         'Quiero mi asesoría gratuita.'
       ]).filter(Boolean).join('\n');
+    };
+    // 2026-11-03: alternativa por correo (auditoría, mejora 6) con el mismo mensaje
+    const mailBtn = q('[data-form-mail]', form);
+    if (mailBtn) mailBtn.addEventListener('click', () => {
+      const lines = message(); if (!lines) return;
+      if (window.__track) window.__track('email_click', 'formulario');
+      const url = 'mailto:info@arangolegacy.com?subject=' + encodeURIComponent(EN ? 'Free consultation' : 'Asesoría gratuita') + '&body=' + encodeURIComponent(lines);
+      window.__lastMail = url;   // para las pruebas
+      location.href = url;
+    });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const lines = message(); if (!lines) return;
       if (window.__track) window.__track('form_submit', 'contacto');
       window.open('https://wa.me/17818669187?text=' + encodeURIComponent(lines), '_blank', 'noopener');
       const ok = q('[data-form-ok]', form); if (ok) { ok.hidden = false; ok.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
     });
   }
+
+  /* ---------- 8b. Menú móvil: se cierra al elegir una sección (2026-11-03) ---------- */
+  // Las secciones con content-visibility se acomodan al acercarse y corren el destino (medido a 820 px): se re-apunta dos veces.
+  document.querySelectorAll('.nav__menu').forEach((m) => m.addEventListener('click', (e) => {
+    const a = e.target.closest('a'); if (!a) return;
+    m.open = false;
+    const t = document.querySelector(a.getAttribute('href')); if (!t) return;
+    e.preventDefault();
+    const go = () => t.scrollIntoView({ block: 'start' });
+    go(); setTimeout(go, 400); setTimeout(go, 1000);
+    history.replaceState(null, '', a.getAttribute('href'));
+  }));
 
   /* ---------- 9. Reels: el póster abre el embed oficial de Instagram en su lugar ---------- */
   // video propio (el de Nora): se reproduce en la misma tarjeta, con sonido, al tocar

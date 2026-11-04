@@ -31,7 +31,7 @@
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <script>document.documentElement.classList.add('js');</script>
-<script>(function(){var ID='',HOSTS=['arangolegacy.com','www.arangolegacy.com'];window.__events=[];
+<script>(function(){var ID='G-Z7JGBWSHQW',HOSTS=['arangolegacy.com','www.arangolegacy.com'];window.__events=[];
 window.__track=function(name,place){var ev={name:name,place:place||'unknown'};window.__events.push(ev);if(window.gtag){window.gtag('event',name,{place:ev.place});}};
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-ev]');if(a){window.__track(a.getAttribute('data-ev'),a.getAttribute('data-place'));}});
 if(!ID||HOSTS.indexOf(location.hostname)<0){return;}
@@ -147,6 +147,17 @@ window.dataLayer=window.dataLayer||[];function gtag(){window.dataLayer.push(argu
       <a href="#calculadora">Calculadora</a>
       <a href="#nosotras">Nosotras</a>
     </nav>
+    <details class="nav__menu">
+      <summary class="nav__menu-btn" aria-label="Abrir el menú de secciones">Menú</summary>
+      <nav class="nav__menu-panel" aria-label="Secciones (menú)">
+        <a href="#productos">Productos</a>
+        <a href="#como">Cómo funciona</a>
+        <a href="#calculadora">Calculadora</a>
+        <a href="#nosotras">Nosotras</a>
+        <a href="#preguntas">Preguntas</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </details>
     <div class="nav__ctas">
       <a class="nav__lang" href="en/" hreflang="en" lang="en">EN</a>
       <a class="btn btn--gold btn--sm" href="https://wa.me/17818669187?text=Hola%2C%20quiero%20una%20asesor%C3%ADa%20gratuita" target="_blank" rel="noopener" data-ev="whatsapp_click" data-place="header">Escríbenos por WhatsApp</a>
@@ -660,6 +671,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){window.dataLayer.push(argu
       </div>
       <input type="hidden" name="estimacion" value="">
       <button class="btn btn--gold btn--xl" type="submit" id="form-submit">Quiero mi asesoría gratuita</button>
+      <button class="form__alt" type="button" data-form-mail>Prefiero enviarlo por correo</button>
       <p class="form__note">Al enviar se abre WhatsApp con tu mensaje listo. Tus datos son confidenciales (<a href="privacidad/">política de privacidad</a>). Sin costo, sin compromiso y sin presión.</p>
       <p class="form__note form__note--license">Nora Arango, agente licenciada en Massachusetts (NPN 22044689). Karen Arango, agente licenciada en Florida (NPN 21584717). En otros estados, cada caso se coordina con un agente licenciado en ese estado.</p>
       <p class="form__error" data-form-error hidden>Necesitamos tu nombre y un teléfono para poder escribirte.</p>
