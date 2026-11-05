@@ -219,7 +219,7 @@
       if (window.__track) window.__track('email_click', 'formulario');
       const url = 'mailto:info@arangolegacy.com?subject=' + encodeURIComponent(EN ? 'Free consultation' : 'Asesoría gratuita') + '&body=' + encodeURIComponent(lines);
       window.__lastMail = url;   // para las pruebas
-      location.href = url;
+      if (!window.__noNav) location.href = url;   // las pruebas ponen __noNav: si no, Windows abre Outlook con cada corrida
     });
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -241,6 +241,10 @@
     go(); setTimeout(go, 400); setTimeout(go, 1000);
     history.replaceState(null, '', a.getAttribute('href'));
   }));
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('.nav__menu[open]').forEach((m) => { m.open = false; m.querySelector('summary').focus(); });
+  });
 
   /* ---------- 9. Reels: el póster abre el embed oficial de Instagram en su lugar ---------- */
   // video propio (el de Nora): se reproduce en la misma tarjeta, con sonido, al tocar
