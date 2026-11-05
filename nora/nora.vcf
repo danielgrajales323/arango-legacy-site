@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Arango;Nora;;;
+FN:Nora Arango
+ORG:Arango Legacy Advisors
+TITLE:Agente de seguros de vida
+TEL;TYPE=CELL,VOICE,pref:+17818669187
+EMAIL;TYPE=INTERNET,WORK:info@arangolegacy.com
+URL:https://arangolegacy.com/nora
+ADR;TYPE=WORK:;;975-977 Saratoga St;Boston;MA;02128;USA
+X-SOCIALPROFILE;TYPE=instagram:https://instagram.com/arangolegacyadvisors
+NOTE:Licenciada en Massachusetts · NPN 22044689
+END:VCARD
